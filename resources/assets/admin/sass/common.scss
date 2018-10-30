@@ -1,0 +1,115 @@
+.card {
+    .card-header {
+        .align-text-middle {
+            display: inline-block;
+            margin-top: 7px;
+        }
+    }
+    .table-spaaak {
+        padding-top: 0px;
+        .table {
+            thead {
+                th {
+                    border-top: none;
+                    border-bottom: 1px solid #c8ced3;
+                }
+            }
+        }
+    }
+    .table {
+        .sort {
+            cursor: pointer;
+            .arrow {
+                background: url('/img/ico_list_sort@2x.png') 50% 50% no-repeat;
+                background-size: 8px;
+                width: 10px;
+                height: 12px;
+                display: inline-block;
+                margin-left: 5px;
+                font-weight: bold;
+            }
+            &.asc {
+                .arrow {
+                    background: url('/img/ico_arrow_top@2x.png') 50% 50% no-repeat;
+                    background-size: 10px;
+                }
+            }
+            &.desc {
+                .arrow {
+                    background: url('/img/ico_arrow_bottom@2x.png') 50% 50% no-repeat;
+                    background-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+.status-flag {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    &.status-0 {
+        background: #F01818;
+    }
+    &.status-1 {
+        background: #F0C726;
+    }
+    &.status-2 {
+        background: #12B849;
+    }
+    &.status-3 {
+        background: #0077FF;
+    }
+    &.status-4 {
+        background: #333;
+    }
+}
+
+.badge {
+    &.status-0 {
+        background: #F01818;
+    }
+    &.status-1 {
+        background: #F0C726;
+    }
+    &.status-2 {
+        background: #12B849;
+    }
+    &.status-3 {
+        background: #0077FF;
+    }
+    &.status-4 {
+        background: #333;
+    }
+}
+
+.c-ft-num {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+}
+
+.p-tag {
+    overflow-x: auto;
+    white-space: nowrap;
+    white-space: -moz-pre-wrap;
+    word-wrap: break-word;
+    font-size: small;
+}
+
+.width-10 {
+    width: 10%;
+}
+
+.width-40 {
+    width: 40%;
+}
+
+.tepm-group {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+.width-5 {
+    width: 5%;
+}

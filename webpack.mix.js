@@ -4,8 +4,10 @@ mix.webpackConfig({
       extensions: ['.js', '.vue', '.json'],
       alias: {
         'vue$': 'vue/dist/vue.esm.js',
-        'scss@': path.resolve('resources/assets/sass'),
-        '@': path.resolve('resources/assets/js'),
+        'scss@': path.resolve('resources/assets/frontend/sass'),
+        '@': path.resolve('resources/assets/frontend/js'),
+        '*': path.resolve('resources/assets/admin/sass'),
+        '*': path.resolve('resources/assets/admin/js'),
         'public' : path.resolve('public'),
       },
     },
@@ -22,5 +24,8 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/frontend/js/app.js', 'public/frontend/js')
+  .js('resources/assets/admin/js/app.js', 'public/admin/js')
+  .sass('resources/assets/frontend/sass/app.scss', 'public/frontend/css')
+  .sass('resources/assets/admin/sass/app.scss', 'public/admin/css')
+  .copyDirectory('resources/assets/admin/css/', 'public/admin/css');

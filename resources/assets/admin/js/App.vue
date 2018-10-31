@@ -6,7 +6,7 @@
 			<app-breadcrumd></app-breadcrumd>
 				<section class="content">
 					<router-view></router-view>
-					<app-modal/>
+					<!-- <app-modal/> -->
 				</section>
 		</div>
 		<app-footer></app-footer>
@@ -32,6 +32,11 @@
 			AppControlSiderbar,
 			AppFooter,
 			AppModal,
+		},
+		computed: {
+			state() {
+                return this.$store.state;
+            }
 		}
 	}
 </script>

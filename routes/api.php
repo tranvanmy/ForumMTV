@@ -21,6 +21,6 @@ Route::group([
   'prefix' => '/v1/',
   'namespace' => 'Api\v1'
 ], function () {
-  Route::get('get-posts', 'PostsController@getPosts');
+  Route::resource('get-posts', 'PostsController')->only(['index', 'store', 'update', 'destroy', 'show']);
   Route::get('get-tags', 'TagsController@getTags');
 });

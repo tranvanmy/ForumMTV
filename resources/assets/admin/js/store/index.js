@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import storeAdminPost from '*/modules/post/store'
+import storeLoading from '*/modules/loading/store'
 
 Vue.use(Vuex)
 
@@ -26,6 +27,7 @@ const storeMain = {
 export default new Vuex.Store({
     modules: {
         storeAdminPost,
-        storeMain
+        storeMain,
+        storeLoading
     }
 })

@@ -1,13 +1,17 @@
 <template>
-	<div class="wrapper">
+	<div class="wrapper" style="position: relative">
+		<div class="splash-screen" v-show="mainLoading.show">
+            <div class="splash-overlay" v-show="mainLoading.show"></div>
+            <div class="splash-spinner"></div>
+        </div>
 		<app-header></app-header>
 		<app-aside></app-aside>
 		<div class="content-wrapper">
-			<app-breadcrumd></app-breadcrumd>
+			<app-breadcrumd :list="list"></app-breadcrumd>
 				<section class="content">
 					<router-view></router-view>
-					<!-- <app-modal/> -->
 				</section>
+			<app-modal/>
 		</div>
 		<app-footer></app-footer>
 		<app-control-siderbar></app-control-siderbar>
@@ -33,10 +37,23 @@
 			AppFooter,
 			AppModal,
 		},
+
 		computed: {
 			state() {
                 return this.$store.state;
-            }
+            },
+
+            mainLoading() {
+            	return this.$store.state.storeLoading.mainLoading
+        	},
+
+	        name() {
+	            return this.$route.name
+	        },
+
+	        list() {
+	            return this.$route.matched
+	        }
 		}
 	}
 </script>

@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix" style="">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-right">Search Post</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-right" @click="openModal">Search Post</a>
                 </div>
                 <!-- /.box-footer -->
             </div>
@@ -132,20 +132,20 @@
             },
     
             openModal() {
-                this.$toasted.success("You are add post success", {
-                    theme: "bubble",
-                    position: "top-right",
-                    duration: 2000
-                });
-                // const params = {
-                //     title: "Test!",
-                //     text: "test test test",
-                //     onConfirm: () => {
-                //         return this.alertFunc();
-                //     }
-                // };
+                // this.$toasted.success("You are add post success", {
+                //     theme: "bubble",
+                //     position: "top-right",
+                //     duration: 2000
+                // });
+                const params = {
+                    title: "Test!",
+                    text: "test test test",
+                    onConfirm: () => {
+                        return this.alertFunc();
+                    }
+                };
     
-                // this.$modal.show(params)
+                this.$modal.show(params)
             },
     
             alertFunc: function() {

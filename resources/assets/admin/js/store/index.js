@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import storeAdminPost from '*/modules/post/store'
-import storeLoading from '*/modules/loading/store'
+import storeAdminPost from '*/modules/post/store';
+import storeLoading from '*/modules/loading/store';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const storeMain = {
     state: {
@@ -22,7 +22,7 @@ const storeMain = {
             API_POST: '/api/v1/gets-post'
         }
     }
-}
+};
 
 export default new Vuex.Store({
     modules: {
@@ -30,4 +30,4 @@ export default new Vuex.Store({
         storeMain,
         storeLoading
     }
-})
+});

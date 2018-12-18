@@ -6,8 +6,8 @@ export default class PostApiService {
      */
     static callApiListPost(params = {}) {  
         return axios.get('/api/v1/get-posts', params)
-        .then(response => response)
-        .catch(error => error)
+            .then(response => response)
+            .catch(error => error);
     }
 
     /**
@@ -17,8 +17,8 @@ export default class PostApiService {
 
     static callApiDetailPost(id) {  
         return axios.get(`/api/v1/get-posts/${id}`)
-        .then(response => response)
-        .catch(error => error)
+            .then(response => response)
+            .catch(error => error);
     }
 }
 

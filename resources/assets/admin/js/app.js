@@ -12,15 +12,15 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import Vue from 'vue'
-import App from '*/App.vue'
-import router from "*/router"
-import Modal from '*/library/modal.js'
-import store from '*/store'
-import Toasted from 'vue-toasted'
+import Vue from 'vue';
+import App from '*/App.vue';
+import router from '*/router';
+import Modal from '*/library/modal.js';
+import store from '*/store';
+import Toasted from 'vue-toasted';
 
-Vue.use(Toasted)
-Vue.use(Modal)
+Vue.use(Toasted);
+Vue.use(Modal);
 
 const app = new Vue({
     el: '#app',

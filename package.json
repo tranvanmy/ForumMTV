@@ -7,6 +7,9 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
+        "eslint": "eslint 'resources/assets/admin/js/**/*.{js,vue}'",
+        "eslint:fix": "eslint 'resources/assets/admin/js/**/*.{js,vue}' --fix",
+        "eslint:watch": "chokidar 'resources/assets/admin/js/**/*.js' 'resources/assets/admin/js/**/*.vue' -c 'npm run eslint:fix'",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
@@ -51,6 +54,7 @@
         "bootstrap-slider": "^9.8.0",
         "bootstrap-timepicker": "^0.5.2",
         "chart.js": "1.0.*",
+        "chokidar-cli": "^1.2.1",
         "ckeditor": "^4.7.0",
         "datatables.net": "^1.10.15",
         "datatables.net-bs": "^1.10.15",

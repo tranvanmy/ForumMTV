@@ -48715,18 +48715,18 @@ module.exports = Component.exports
 
 
 var Modal = {
-  install: function install(Vue, options) {
-    this.EventBus = new Vue();
-    Vue.component('app-modal', __WEBPACK_IMPORTED_MODULE_0__components_modals_AppModal___default.a);
-    Vue.prototype.$modal = {
-      show: function show(params) {
-        Modal.EventBus.$emit('show', params);
-      },
-      hide: function hide() {
-        Modal.EventBus.$emit('hide');
-      }
-    };
-  }
+    install: function install(Vue, options) {
+        this.EventBus = new Vue();
+        Vue.component('app-modal', __WEBPACK_IMPORTED_MODULE_0__components_modals_AppModal___default.a);
+        Vue.prototype.$modal = {
+            show: function show(params) {
+                Modal.EventBus.$emit('show', params);
+            },
+            hide: function hide() {
+                Modal.EventBus.$emit('hide');
+            }
+        };
+    }
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Modal);

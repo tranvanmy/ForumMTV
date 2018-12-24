@@ -1,7 +1,7 @@
-import PostApiService from '../api'
-import Helper from '*/library/Helper'
+import PostApiService from '../api';
+import Helper from '*/library/Helper';
 
-const POST_LIST = 'admin_post/list'
+const POST_LIST = 'admin_post/list';
 
 const state = {
     listPost: {},

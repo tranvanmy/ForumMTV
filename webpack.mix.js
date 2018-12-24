@@ -29,6 +29,7 @@ mix.js('resources/assets/frontend/js/app.js', 'public/frontend/js')
   .sass('resources/assets/frontend/sass/app.scss', 'public/frontend/css')
   .sass('resources/assets/admin/sass/app.scss', 'public/admin/css')
   .copyDirectory('resources/assets/admin/dist/img', 'public/dist/img')
+  .copyDirectory('resources/assets/admin/dist/video', 'public/dist')
   .styles([
     'node_modules/bootstrap/dist/css/bootstrap.min.css',
     'node_modules/admin-lte/dist/css/AdminLTE.css',

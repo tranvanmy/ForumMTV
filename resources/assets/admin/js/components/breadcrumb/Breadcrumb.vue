@@ -5,14 +5,8 @@
         <small>Control panel</small>
     </h1>
     <ol class="breadcrumb">
-        <li>
-        	<router-link :to="{ name: 'home'}">
-        		<i class="fa fa-dashboard"></i>
-        		Home
-        	</router-link>
-       	</li>
-
-        <li v-for="(item, index) in list">
+        <i class="fa fa-dashboard"></i>
+        <li v-for="(item, index) in list" :key="index">
         	<span class="active" v-if="isLast(index)">{{ showName(item) }}</span>
             <router-link :to="item" v-else>{{ showName(item) }}</router-link>
         </li>
@@ -30,7 +24,7 @@ export default {
     		required: true,
     		default: () => []
     	}
-    },	
+    },
     methods: {
     	isLast (index) {
             return index === this.list.length - 1

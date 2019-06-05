@@ -32,7 +32,7 @@ services:
             - logs
             - application
         ports:
-            - "2019:80"
+            - "80:80"
         links:
             - php-fpm
     data:
@@ -80,6 +80,30 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: root
             MYSQL_ROOT_PASSWORD: root
+    phpmyadmin:
+        container_name: forum_phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "8080:80"
+        links:
+            - "mysql:mysql"
+    phpmyadmin_test:
+        container_name: forum_phpmyadmin_test
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "8181:80"
+        links:
+            - "mysql_test:mysql_test"
     redis:
         container_name: forum_redis
         restart: always

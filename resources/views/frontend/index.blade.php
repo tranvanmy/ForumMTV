@@ -1,20 +1,38 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" value="{{ csrf_token() }}">
 
-        <title>Forum</title>
-        <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
-        
-        <!-- Import Ionicon icons & Google Fonts our Bootstrap theme relies on -->
-        <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-        <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        {{-- {{ --<linkhref="asset('frontend/css/app.css')"rel="stylesheet"> }} --}}
 
-        <!-- Import the custom Bootstrap 4 theme from our hosted CDN -->
-        <link rel="stylesheet" href="//demo.productionready.io/main.css">
+        <title> Lovly Wedding - Responsive Wedding Template </title>
+
+        <!-- Favicon and Touch Icons -->
+        <link href="asset{{ '/frontend/dist/wedding/images/favicon/favicon.png' }}" rel="shortcut icon" type="image/png">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+
+        <!-- Icon fonts -->
+        <link href="/frontend/dist/wedding/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/flaticon.css" rel="stylesheet">
+
+        <!-- Bootstrap core CSS -->
+        <link href="/frontend/dist/wedding/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Plugins for this template -->
+        <link href="/frontend/dist/wedding/css/animate.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/owl.carousel.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/owl.theme.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/slick.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/slick-theme.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/owl.transitions.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/jquery.fancybox.css" rel="stylesheet">
+        <link href="/frontend/dist/wedding/css/magnific-popup.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="/frontend/dist/wedding/css/style.css" rel="stylesheet">
 
     </head>
     <body>

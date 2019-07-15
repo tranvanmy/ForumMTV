@@ -55,7 +55,8 @@ mix.js('resources/assets/frontend/js/app.js', 'public/frontend/js')
         'resources/assets/frontend/dist/wedding/js/jquery.min.js',
         'resources/assets/frontend/dist/wedding/js/bootstrap.min.js',
         'resources/assets/frontend/dist/wedding/js/jquery-plugin-collection.js',
-        'resources/assets/frontend/dist/wedding/js/script.js'
+        'resources/assets/frontend/dist/wedding/js/script.js',
+        'resources/assets/frontend/dist/wedding/js/jquery.flurry.js'
     ], 'public/frontend/dist/wedding/js/wedding.min.js')
     .scripts([
         'node_modules/admin-lte/dist/js/demo.js'

@@ -15,12 +15,11 @@
             </button>
 
             <div class="music-holder">
-                <iframe src="/frontend/dist/wedding/video/BeautifulInWhite-ShaneFilan-524801.mp3" style="display:none" id="iframeAudio"></iframe>
+                <iframe src="/frontend/dist/wedding/video/BeautifulInWhite-ShaneFilan-524801.mp3" loop="true" style="display:none" id="iframeAudio"></iframe>
             </div>
         </div>
         <!-- end music box -->
-
-
+        
         <!-- start of hero -->
         <section class="hero">
             <div class="hero-slider hero-slider-s1">

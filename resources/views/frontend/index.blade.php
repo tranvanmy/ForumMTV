@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" value="{{ csrf_token() }}">
+        {{-- {{ --<linkhref="asset('frontend/css/app.css')"rel="stylesheet"> }} --}}
 
-        <title>Forum</title>
-        <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
-        
-        <!-- Import Ionicon icons & Google Fonts our Bootstrap theme relies on -->
-        <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-        <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <title> M <3 D </title>
 
-        <!-- Import the custom Bootstrap 4 theme from our hosted CDN -->
-        <link rel="stylesheet" href="//demo.productionready.io/main.css">
+        <!-- Favicon and Touch Icons -->
+        <link href="/frontend/dist/wedding/images/favicon/favicon.png" rel="shortcut icon" type="image/png">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+        <link href="/frontend/dist/wedding/images/favicon/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
 
+        <link href="{{ asset('frontend/dist/wedding/css/wedding.min.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div id="app"></div>
+        <div id="home"></div>
 
         <script src="{{ asset('frontend/js/app.js') }}"></script>
+        <script src="{{ asset('frontend/dist/wedding/js/wedding.min.js') }}"></script>
     </body>
 </html>

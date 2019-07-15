@@ -42429,10 +42429,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
+ * Bootstrap: transition.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#transitions
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -42440,7 +42440,7 @@ __webpack_require__(30)
 +function ($) {
   'use strict';
 
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // CSS TRANSITION SUPPORT (Shoutout: https://modernizr.com/)
   // ============================================================
 
   function transitionEnd() {
@@ -42462,7 +42462,7 @@ __webpack_require__(30)
     return false // explicit for ie8 (  ._.)
   }
 
-  // http://blog.alexmaccaw.com/css-transitions
+  // https://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
     var called = false
     var $el = this
@@ -42494,10 +42494,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: alert.js v3.3.7
- * http://getbootstrap.com/javascript/#alerts
+ * Bootstrap: alert.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#alerts
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -42513,7 +42513,7 @@ __webpack_require__(30)
     $(el).on('click', dismiss, this.close)
   }
 
-  Alert.VERSION = '3.3.7'
+  Alert.VERSION = '3.4.0'
 
   Alert.TRANSITION_DURATION = 150
 
@@ -42526,7 +42526,8 @@ __webpack_require__(30)
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
     }
 
-    var $parent = $(selector === '#' ? [] : selector)
+    selector    = selector === '#' ? [] : selector
+    var $parent = $(document).find(selector)
 
     if (e) e.preventDefault()
 
@@ -42594,10 +42595,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: button.js v3.3.7
- * http://getbootstrap.com/javascript/#buttons
+ * Bootstrap: button.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#buttons
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -42614,7 +42615,7 @@ __webpack_require__(30)
     this.isLoading = false
   }
 
-  Button.VERSION  = '3.3.7'
+  Button.VERSION  = '3.4.0'
 
   Button.DEFAULTS = {
     loadingText: 'loading...'
@@ -42725,10 +42726,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: carousel.js v3.3.7
- * http://getbootstrap.com/javascript/#carousel
+ * Bootstrap: carousel.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#carousel
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -42756,7 +42757,7 @@ __webpack_require__(30)
       .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
   }
 
-  Carousel.VERSION  = '3.3.7'
+  Carousel.VERSION  = '3.4.0'
 
   Carousel.TRANSITION_DURATION = 600
 
@@ -42870,7 +42871,9 @@ __webpack_require__(30)
     var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
     if ($.support.transition && this.$element.hasClass('slide')) {
       $next.addClass(type)
-      $next[0].offsetWidth // force reflow
+      if (typeof $next === 'object' && $next.length) {
+        $next[0].offsetWidth // force reflow
+      }
       $active.addClass(direction)
       $next.addClass(direction)
       $active
@@ -42932,10 +42935,17 @@ __webpack_require__(30)
   // =================
 
   var clickHandler = function (e) {
-    var href
     var $this   = $(this)
-    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+    var href    = $this.attr('href')
+    if (href) {
+      href = href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+    }
+
+    var target  = $this.attr('data-target') || href
+    var $target = $(document).find(target)
+
     if (!$target.hasClass('carousel')) return
+
     var options = $.extend({}, $target.data(), $this.data())
     var slideIndex = $this.attr('data-slide-to')
     if (slideIndex) options.interval = false
@@ -42968,10 +42978,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
+ * Bootstrap: collapse.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#collapse
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -42999,7 +43009,7 @@ __webpack_require__(30)
     if (this.options.toggle) this.toggle()
   }
 
-  Collapse.VERSION  = '3.3.7'
+  Collapse.VERSION  = '3.4.0'
 
   Collapse.TRANSITION_DURATION = 350
 
@@ -43106,7 +43116,7 @@ __webpack_require__(30)
   }
 
   Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
+    return $(document).find(this.options.parent)
       .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
       .each($.proxy(function (i, element) {
         var $element = $(element)
@@ -43129,7 +43139,7 @@ __webpack_require__(30)
     var target = $trigger.attr('data-target')
       || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
 
-    return $(target)
+    return $(document).find(target)
   }
 
 
@@ -43186,10 +43196,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
+ * Bootstrap: dropdown.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#dropdowns
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -43206,7 +43216,7 @@ __webpack_require__(30)
     $(element).on('click.bs.dropdown', this.toggle)
   }
 
-  Dropdown.VERSION = '3.3.7'
+  Dropdown.VERSION = '3.4.0'
 
   function getParent($this) {
     var selector = $this.attr('data-target')
@@ -43216,7 +43226,7 @@ __webpack_require__(30)
       selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
     }
 
-    var $parent = selector && $(selector)
+    var $parent = selector && $(document).find(selector)
 
     return $parent && $parent.length ? $parent : $this.parent()
   }
@@ -43357,10 +43367,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: modal.js v3.3.7
- * http://getbootstrap.com/javascript/#modals
+ * Bootstrap: modal.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#modals
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -43372,15 +43382,16 @@ __webpack_require__(30)
   // ======================
 
   var Modal = function (element, options) {
-    this.options             = options
-    this.$body               = $(document.body)
-    this.$element            = $(element)
-    this.$dialog             = this.$element.find('.modal-dialog')
-    this.$backdrop           = null
-    this.isShown             = null
-    this.originalBodyPad     = null
-    this.scrollbarWidth      = 0
+    this.options = options
+    this.$body = $(document.body)
+    this.$element = $(element)
+    this.$dialog = this.$element.find('.modal-dialog')
+    this.$backdrop = null
+    this.isShown = null
+    this.originalBodyPad = null
+    this.scrollbarWidth = 0
     this.ignoreBackdropClick = false
+    this.fixedContent = '.navbar-fixed-top, .navbar-fixed-bottom'
 
     if (this.options.remote) {
       this.$element
@@ -43391,7 +43402,7 @@ __webpack_require__(30)
     }
   }
 
-  Modal.VERSION  = '3.3.7'
+  Modal.VERSION = '3.4.0'
 
   Modal.TRANSITION_DURATION = 300
   Modal.BACKDROP_TRANSITION_DURATION = 150
@@ -43408,7 +43419,7 @@ __webpack_require__(30)
 
   Modal.prototype.show = function (_relatedTarget) {
     var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+    var e = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
 
     this.$element.trigger(e)
 
@@ -43499,8 +43510,8 @@ __webpack_require__(30)
       .off('focusin.bs.modal') // guard against infinite focus loop
       .on('focusin.bs.modal', $.proxy(function (e) {
         if (document !== e.target &&
-            this.$element[0] !== e.target &&
-            !this.$element.has(e.target).length) {
+          this.$element[0] !== e.target &&
+          !this.$element.has(e.target).length) {
           this.$element.trigger('focus')
         }
       }, this))
@@ -43602,7 +43613,7 @@ __webpack_require__(30)
     var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
 
     this.$element.css({
-      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
       paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
     })
   }
@@ -43627,11 +43638,26 @@ __webpack_require__(30)
   Modal.prototype.setScrollbar = function () {
     var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
     this.originalBodyPad = document.body.style.paddingRight || ''
-    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
+    var scrollbarWidth = this.scrollbarWidth
+    if (this.bodyIsOverflowing) {
+      this.$body.css('padding-right', bodyPad + scrollbarWidth)
+      $(this.fixedContent).each(function (index, element) {
+        var actualPadding = element.style.paddingRight
+        var calculatedPadding = $(element).css('padding-right')
+        $(element)
+          .data('padding-right', actualPadding)
+          .css('padding-right', parseFloat(calculatedPadding) + scrollbarWidth + 'px')
+      })
+    }
   }
 
   Modal.prototype.resetScrollbar = function () {
     this.$body.css('padding-right', this.originalBodyPad)
+    $(this.fixedContent).each(function (index, element) {
+      var padding = $(element).data('padding-right')
+      $(element).removeData('padding-right')
+      element.style.paddingRight = padding ? padding : ''
+    })
   }
 
   Modal.prototype.measureScrollbar = function () { // thx walsh
@@ -43649,8 +43675,8 @@ __webpack_require__(30)
 
   function Plugin(option, _relatedTarget) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.modal')
+      var $this = $(this)
+      var data = $this.data('bs.modal')
       var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
@@ -43661,7 +43687,7 @@ __webpack_require__(30)
 
   var old = $.fn.modal
 
-  $.fn.modal             = Plugin
+  $.fn.modal = Plugin
   $.fn.modal.Constructor = Modal
 
 
@@ -43678,10 +43704,13 @@ __webpack_require__(30)
   // ==============
 
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this   = $(this)
-    var href    = $this.attr('href')
-    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+    var $this = $(this)
+    var href = $this.attr('href')
+    var target = $this.attr('data-target') ||
+      (href && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+
+    var $target = $(document).find(target)
+    var option = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
     if ($this.is('a')) e.preventDefault()
 
@@ -43702,11 +43731,11 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: tooltip.js v3.3.7
- * http://getbootstrap.com/javascript/#tooltip
+ * Bootstrap: tooltip.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -43729,7 +43758,7 @@ __webpack_require__(30)
     this.init('tooltip', element, options)
   }
 
-  Tooltip.VERSION  = '3.3.7'
+  Tooltip.VERSION  = '3.4.0'
 
   Tooltip.TRANSITION_DURATION = 150
 
@@ -43754,7 +43783,7 @@ __webpack_require__(30)
     this.type      = type
     this.$element  = $(element)
     this.options   = this.getOptions(options)
-    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
+    this.$viewport = this.options.viewport && $(document).find($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
     this.inState   = { click: false, hover: false, focus: false }
 
     if (this.$element[0] instanceof document.constructor && !this.options.selector) {
@@ -43907,7 +43936,7 @@ __webpack_require__(30)
         .addClass(placement)
         .data('bs.' + this.type, this)
 
-      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+      this.options.container ? $tip.appendTo($(document).find(this.options.container)) : $tip.insertAfter(this.$element)
       this.$element.trigger('inserted.bs.' + this.type)
 
       var pos          = this.getPosition()
@@ -44228,10 +44257,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: popover.js v3.3.7
- * http://getbootstrap.com/javascript/#popovers
+ * Bootstrap: popover.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#popovers
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -44248,7 +44277,7 @@ __webpack_require__(30)
 
   if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
 
-  Popover.VERSION  = '3.3.7'
+  Popover.VERSION  = '3.4.0'
 
   Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
     placement: 'right',
@@ -44296,8 +44325,8 @@ __webpack_require__(30)
 
     return $e.attr('data-content')
       || (typeof o.content == 'function' ?
-            o.content.call($e[0]) :
-            o.content)
+        o.content.call($e[0]) :
+        o.content)
   }
 
   Popover.prototype.arrow = function () {
@@ -44342,10 +44371,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: scrollspy.js v3.3.7
- * http://getbootstrap.com/javascript/#scrollspy
+ * Bootstrap: scrollspy.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#scrollspy
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -44371,7 +44400,7 @@ __webpack_require__(30)
     this.process()
   }
 
-  ScrollSpy.VERSION  = '3.3.7'
+  ScrollSpy.VERSION  = '3.4.0'
 
   ScrollSpy.DEFAULTS = {
     offset: 10
@@ -44520,10 +44549,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: tab.js v3.3.7
- * http://getbootstrap.com/javascript/#tabs
+ * Bootstrap: tab.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#tabs
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -44540,7 +44569,7 @@ __webpack_require__(30)
     // jscs:enable requireDollarBeforejQueryAssignment
   }
 
-  Tab.VERSION = '3.3.7'
+  Tab.VERSION = '3.4.0'
 
   Tab.TRANSITION_DURATION = 150
 
@@ -44569,7 +44598,7 @@ __webpack_require__(30)
 
     if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
 
-    var $target = $(selector)
+    var $target = $(document).find(selector)
 
     this.activate($this.closest('li'), $ul)
     this.activate($target, $target.parent(), function () {
@@ -44594,15 +44623,15 @@ __webpack_require__(30)
       $active
         .removeClass('active')
         .find('> .dropdown-menu > .active')
-          .removeClass('active')
+        .removeClass('active')
         .end()
         .find('[data-toggle="tab"]')
-          .attr('aria-expanded', false)
+        .attr('aria-expanded', false)
 
       element
         .addClass('active')
         .find('[data-toggle="tab"]')
-          .attr('aria-expanded', true)
+        .attr('aria-expanded', true)
 
       if (transition) {
         element[0].offsetWidth // reflow for transition
@@ -44614,10 +44643,10 @@ __webpack_require__(30)
       if (element.parent('.dropdown-menu').length) {
         element
           .closest('li.dropdown')
-            .addClass('active')
+          .addClass('active')
           .end()
           .find('[data-toggle="tab"]')
-            .attr('aria-expanded', true)
+          .attr('aria-expanded', true)
       }
 
       callback && callback()
@@ -44681,10 +44710,10 @@ __webpack_require__(30)
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: affix.js v3.3.7
- * http://getbootstrap.com/javascript/#affix
+ * Bootstrap: affix.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#affix
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -44698,7 +44727,9 @@ __webpack_require__(30)
   var Affix = function (element, options) {
     this.options = $.extend({}, Affix.DEFAULTS, options)
 
-    this.$target = $(this.options.target)
+    var target = this.options.target === Affix.DEFAULTS.target ? $(this.options.target) : $(document).find(this.options.target)
+
+    this.$target = target
       .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
       .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
 
@@ -44710,7 +44741,7 @@ __webpack_require__(30)
     this.checkPosition()
   }
 
-  Affix.VERSION  = '3.3.7'
+  Affix.VERSION  = '3.4.0'
 
   Affix.RESET    = 'affix affix-top affix-bottom'
 
@@ -48660,13 +48691,13 @@ if (inBrowser && window.Vue) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(69)
+  __webpack_require__(72)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(74)
 /* template */
-var __vue_template__ = __webpack_require__(72)
+var __vue_template__ = __webpack_require__(75)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48737,8 +48768,8 @@ var Modal = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(59);
-__webpack_require__(87);
-module.exports = __webpack_require__(88);
+__webpack_require__(96);
+module.exports = __webpack_require__(97);
 
 
 /***/ }),
@@ -48750,7 +48781,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__plugins_modal_js__ = __webpack_require__(55);
 
 /**
@@ -48774,7 +48805,7 @@ __webpack_require__(60);
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_3__plugins_modal_js__["a" /* default */]);
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
-  el: '#app',
+  el: '#home',
   router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */],
   render: function render(h) {
     return h(__WEBPACK_IMPORTED_MODULE_1__App_vue___default.a);
@@ -48851,7 +48882,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(62)
 /* template */
-var __vue_template__ = __webpack_require__(73)
+var __vue_template__ = __webpack_require__(76)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48895,12 +48926,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Header__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Header___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Header__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Footer__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Footer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modals_AppModal__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_modals_AppModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_modals_AppModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Slide__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Slide___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Slide__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Header__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Header___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Header__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Footer__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_modals_AppModal__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_modals_AppModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_modals_AppModal__);
 //
 //
 //
@@ -48910,6 +48943,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -48918,9 +48953,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: "App",
 	components: {
-		AppHeader: __WEBPACK_IMPORTED_MODULE_0__components_Header___default.a,
-		AppFooter: __WEBPACK_IMPORTED_MODULE_1__components_Footer___default.a,
-		AppModal: __WEBPACK_IMPORTED_MODULE_2__components_modals_AppModal___default.a
+		AppSlide: __WEBPACK_IMPORTED_MODULE_0__components_Slide___default.a,
+		AppHeader: __WEBPACK_IMPORTED_MODULE_1__components_Header___default.a,
+		AppFooter: __WEBPACK_IMPORTED_MODULE_2__components_Footer___default.a,
+		AppModal: __WEBPACK_IMPORTED_MODULE_3__components_modals_AppModal___default.a
 	}
 });
 
@@ -48950,7 +48986,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/frontend/js/components/Header.vue"
+Component.options.__file = "resources/assets/frontend/js/components/Slide.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -48959,9 +48995,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-72144409", Component.options)
+    hotAPI.createRecord("data-v-336fb5e5", Component.options)
   } else {
-    hotAPI.reload("data-v-72144409", Component.options)
+    hotAPI.reload("data-v-336fb5e5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -49003,9 +49039,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AppHeader"
+    name: "AppSlide",
+    data: function data() {
+        return {
+            autoMusic: true
+        };
+    },
+
+    computed: {},
+
+    created: function created() {
+        // console.log(this.$route)
+    },
+
+    methods: {
+        handleMusic: function handleMusic() {
+            this.autoMusic = !this.autoMusic;
+        }
+    }
 });
 
 /***/ }),
@@ -49016,47 +49120,264 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "music-box" }, [
+      _c(
+        "button",
+        { staticClass: "music-box-toggle-btn", on: { click: _vm.handleMusic } },
+        [_c("i", { staticClass: "fa fa-music" })]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "music-holder" })
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "navbar navbar-light" }, [
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "a",
-          { staticClass: "navbar-brand", attrs: { href: "index.html" } },
-          [_vm._v("WEBDEV")]
-        ),
+    return _c("div", { staticClass: "preloader" }, [
+      _c("div", { staticClass: "inner" }, [
+        _c("span", { staticClass: "icon" }, [
+          _c("i", { staticClass: "fi flaticon-two" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "hero" }, [
+      _c("div", { staticClass: "hero-slider hero-slider-s1" }, [
+        _c("div", { staticClass: "slide-item" }, [
+          _c("img", {
+            staticClass: "slider-bg",
+            attrs: {
+              src: "/frontend/dist/wedding/images/slider/slide-1.jpg",
+              alt: ""
+            }
+          })
+        ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "nav navbar-nav pull-xs-right" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link active", attrs: { href: "" } }, [
-              _vm._v("Home")
-            ])
-          ]),
+        _c("div", { staticClass: "slide-item" }, [
+          _c("img", {
+            staticClass: "slider-bg",
+            attrs: {
+              src: "/frontend/dist/wedding/images/slider/slide-2.jpg",
+              alt: ""
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "wedding-announcement" }, [
+        _c("div", { staticClass: "couple-name-merried-text" }, [
+          _c(
+            "h2",
+            {
+              staticClass: "wow slideInUp",
+              attrs: { "data-wow-duration": "1s" }
+            },
+            [_vm._v("Văn Mỹ & Phương Dung")]
+          ),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "" } }, [
-              _c("i", { staticClass: "ion-compose" }),
-              _vm._v(" New Post\n        ")
-            ])
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "married-text wow fadeIn",
+              attrs: { "data-wow-delay": "1s" }
+            },
+            [
+              _c("h4", {}, [
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.05s" }
+                  },
+                  [_vm._v("W")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.10s" }
+                  },
+                  [_vm._v("e")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.15s" }
+                  },
+                  [_vm._v("'")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.20s" }
+                  },
+                  [_vm._v("r")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.25s" }
+                  },
+                  [_vm._v("e")]
+                ),
+                _vm._v(" "),
+                _c("span", [_vm._v(" ")]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.30s" }
+                  },
+                  [_vm._v("g")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.35s" }
+                  },
+                  [_vm._v("e")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.40s" }
+                  },
+                  [_vm._v("t")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.45s" }
+                  },
+                  [_vm._v("t")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.50s" }
+                  },
+                  [_vm._v("i")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.55s" }
+                  },
+                  [_vm._v("n")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.60s" }
+                  },
+                  [_vm._v("g")]
+                ),
+                _vm._v(" "),
+                _c("span", [_vm._v(" ")]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.65s" }
+                  },
+                  [_vm._v("m")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.70s" }
+                  },
+                  [_vm._v("a")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.75s" }
+                  },
+                  [_vm._v("r")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.80s" }
+                  },
+                  [_vm._v("r")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.85s" }
+                  },
+                  [_vm._v("i")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.90s" }
+                  },
+                  [_vm._v("e")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: " wow fadeInUp",
+                    attrs: { "data-wow-delay": "1.95s" }
+                  },
+                  [_vm._v("d")]
+                )
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "save-the-date" }, [
+          _c("h4", [_vm._v("Save the date")]),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "" } }, [
-              _c("i", { staticClass: "ion-gear-a" }),
-              _vm._v(" Settings\n        ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "" } }, [
-              _vm._v("Sign up")
-            ])
-          ])
+          _c("span", { staticClass: "date" }, [_vm._v("25 OCT 2019")])
         ])
       ])
     ])
@@ -49067,7 +49388,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-72144409", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-336fb5e5", module.exports)
   }
 }
 
@@ -49081,6 +49402,276 @@ var normalizeComponent = __webpack_require__(1)
 var __vue_script__ = __webpack_require__(67)
 /* template */
 var __vue_template__ = __webpack_require__(68)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/frontend/js/components/Header.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-72144409", Component.options)
+  } else {
+    hotAPI.reload("data-v-72144409", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "AppHeader",
+    data: function data() {
+        return {
+            a: 1
+        };
+    },
+
+
+    computed: {
+        checkRouteBlog: function checkRouteBlog() {
+            if (this.$route.name.path != '/') {
+                return false;
+            }
+
+            return true;
+        }
+    },
+
+    created: function created() {
+        // debugger
+        console.log(this.$route);
+        // this.getListSchedule();
+    },
+
+    methods: {}
+});
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "header",
+    { staticClass: "site-header header-style-1", attrs: { id: "header" } },
+    [
+      _c("nav", { staticClass: "navigation navbar navbar-default" }, [
+        _c("div", { staticClass: "container" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "navbar-collapse collapse navbar-right navigation-holder",
+              attrs: { id: "navbar" }
+            },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("ul", { staticClass: "nav navbar-nav" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._m(8),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { path: "/blog" } } }, [
+                      _vm._v("Blog ")
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "navbar-header" }, [
+      _c("button", { staticClass: "open-btn", attrs: { type: "button" } }, [
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Toggle navigation")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-bar" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "couple-logo" }, [
+        _c("h1", [
+          _c("a", { attrs: { href: "/" } }, [
+            _vm._v("M "),
+            _c("i", { staticClass: "fi flaticon-shape-1" }),
+            _vm._v(" D")
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "close-navbar" }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "/" } }, [_vm._v("Home")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#couple" } }, [_vm._v("Couple")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#story" } }, [_vm._v("Story")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#events" } }, [_vm._v("Events")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#people" } }, [_vm._v("People")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#gallery" } }, [_vm._v("Gallery")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#rsvp" } }, [_vm._v("RSVP")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-72144409", module.exports)
+  }
+}
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(70)
+/* template */
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49119,11 +49710,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49141,7 +49739,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49155,18 +49753,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", [
+    return _c("footer", { staticClass: "site-footer" }, [
+      _c("div", { staticClass: "back-to-top" }, [
+        _c("a", { staticClass: "back-to-top-btn", attrs: { href: "#" } }, [
+          _c("span", [_c("i", { staticClass: "fi flaticon-cupid" })])
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "container" }, [
-        _c("a", { staticClass: "logo-font", attrs: { href: "/" } }, [
-          _vm._v("WEBDEV")
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "attribution" }, [
-          _vm._v(
-            "\n      Học Vue qua dự án: Xây dựng SPA App với Laravel và VueJS "
-          ),
-          _c("a", { attrs: { href: "https://webdev.hapiviet.com/" } }, [
-            _vm._v("Webdev Hapiviet")
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col col-xs-12" }, [
+            _c("h2", [_vm._v("Forever and Always Our Love")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("- Mick (The groom)")])
           ])
         ])
       ])
@@ -49183,13 +49782,13 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49209,7 +49808,7 @@ if(false) {
 }
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -49223,7 +49822,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49311,7 +49910,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49387,7 +49986,7 @@ if (false) {
 }
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49396,8 +49995,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "root" } },
+    { staticClass: "page-wrapper" },
     [
+      _c("app-slide"),
+      _vm._v(" "),
       _c("app-header"),
       _vm._v(" "),
       _c("router-view"),
@@ -49420,18 +50021,24 @@ if (false) {
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Home__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Home__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Home__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Register__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_NotFound__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Blog__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Blog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Blog__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_BlogDetail__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_BlogDetail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_BlogDetail__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Register__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Register__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NotFound__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_NotFound__);
+
+
 
 
 
@@ -49442,20 +50049,20 @@ if (false) {
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    routes: [{ path: '/', name: 'home', component: __WEBPACK_IMPORTED_MODULE_2__components_Home___default.a }, { path: '/register', name: 'register', component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_4__components_NotFound___default.a }],
+    routes: [{ path: '/', name: 'home', component: __WEBPACK_IMPORTED_MODULE_2__components_Home___default.a }, { path: '/blog', name: 'home', component: __WEBPACK_IMPORTED_MODULE_3__components_Blog___default.a }, { path: '/blog/detail', name: 'home', component: __WEBPACK_IMPORTED_MODULE_4__components_BlogDetail___default.a }, { path: '/register', name: 'register', component: __WEBPACK_IMPORTED_MODULE_5__components_Register___default.a }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_6__components_NotFound___default.a }],
     mode: 'history'
 }));
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49494,11 +50101,609 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49591,7 +50796,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49605,174 +50810,1855 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "home-page" }, [
-      _c("div", { staticClass: "banner" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("h1", { staticClass: "logo-font" }, [_vm._v("WEBDEV")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("A place to share your knowledge.")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container page" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-9" }, [
-            _c("div", { staticClass: "feed-toggle" }, [
-              _c("ul", { staticClass: "nav nav-pills outline-active" }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link disabled", attrs: { href: "" } },
-                    [_vm._v("Your Feed")]
-                  )
+    return _c("div", [
+      _c(
+        "section",
+        {
+          staticClass: "wedding-couple-section section-padding",
+          attrs: { id: "couple" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "gb groom" }, [
+                  _c("div", { staticClass: "img-holder wow fadeInLeftSlow" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/couple/img-1.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "details" }, [
+                    _c("div", { staticClass: "details-inner" }, [
+                      _c("h3", [_vm._v("The groom")]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Hi I am suntina , dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "signature" }, [
+                        _vm._v("Suntina")
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "social-links" }, [
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-facebook" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-twitter" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-pinterest" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-google-plus" })
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link active", attrs: { href: "" } },
-                    [_vm._v("Global Feed")]
-                  )
+                _c("div", { staticClass: "gb bride" }, [
+                  _c("div", { staticClass: "details" }, [
+                    _c("div", { staticClass: "details-inner" }, [
+                      _c("h3", [_vm._v("The Bride")]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Hi I am suntina , dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "signature" }, [
+                        _vm._v("Famico")
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "social-links" }, [
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-facebook" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-twitter" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-pinterest" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-google-plus" })
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "img-holder wow fadeInRightSlow" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/couple/img-2.jpg",
+                        alt: ""
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "count-down-section section-padding parallax",
+          attrs: {
+            "data-bg-image": "/frontend/dist/wedding/images/countdown-bg.jpg",
+            "data-speed": "7"
+          }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-md-4" }, [
+                _c("h2", [
+                  _c("span", [_vm._v("We are waiting for.....")]),
+                  _vm._v(" The adventure")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col col-md-7 col-md-offset-1" }, [
+                _c("div", { staticClass: "count-down-clock" }, [
+                  _c("div", { attrs: { id: "clock" } })
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "story-section section-padding",
+          attrs: { id: "story" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Our love story")])
                 ])
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "article-preview" }, [
-              _c("div", { staticClass: "article-meta" }, [
-                _c("a", { attrs: { href: "profile.html" } }, [
-                  _c("img", {
-                    attrs: { src: "http://i.imgur.com/Qr71crq.jpg" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "info" }, [
-                  _c("a", { staticClass: "author", attrs: { href: "" } }, [
-                    _vm._v("Eric Simons")
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "story-timeline" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "story-text right-align-text" },
+                        [
+                          _c("h3", [_vm._v("First meet")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "date" }, [
+                            _vm._v("Jan 12 2017")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, "
+                            )
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-6" }, [
+                      _c("div", { staticClass: "img-holder" }, [
+                        _c("img", {
+                          staticClass: "img img-responsive",
+                          attrs: {
+                            src:
+                              "/frontend/dist/wedding/images/story/img-1.jpg",
+                            alt: ""
+                          }
+                        })
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "date" }, [_vm._v("January 20th")])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-primary btn-sm pull-xs-right"
-                  },
-                  [
-                    _c("i", { staticClass: "ion-heart" }),
-                    _vm._v(" 29\n            ")
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "preview-link", attrs: { href: "" } }, [
-                _c("h1", [_vm._v("How to build webapps that scale")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("This is the description for the post.")]),
-                _vm._v(" "),
-                _c("span", [_vm._v("Read more...")])
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-md-6" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "img-holder right-align-text story-slider"
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/story/img-2.jpg",
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/story/img-3.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-6 text-holder" }, [
+                      _c("span", { staticClass: "heart" }, [
+                        _c("i", { staticClass: "fa fa-heart" })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "story-text" }, [
+                        _c("h3", [_vm._v("First date")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v("Feb 14 2017")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col col-md-6 text-holder right-heart" },
+                      [
+                        _c("span", { staticClass: "heart" }, [
+                          _c("i", { staticClass: "fa fa-heart" })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "story-text right-align-text" },
+                          [
+                            _c("h3", [_vm._v("Proposal")]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "date" }, [
+                              _vm._v("Apr 14 2017")
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, "
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-6" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "img-holder right-align-text story-slider"
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/story/img-7.jpg",
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/story/img-5.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col col-md-6" }, [
+                      _c("div", { staticClass: "img-holder video-holder" }, [
+                        _c("img", {
+                          staticClass: "img img-responsive",
+                          attrs: {
+                            src:
+                              "/frontend/dist/wedding/images/story/img-8.jpg",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "video-play-btn",
+                            attrs: {
+                              href:
+                                "https://www.youtube.com/embed/XSGBVzeBUbk?autoplay=1",
+                              "data-type": "iframe"
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-play" })]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col col-md-6 text-holder" }, [
+                      _c("span", { staticClass: "heart" }, [
+                        _c("i", { staticClass: "fa fa-heart" })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "story-text" }, [
+                        _c("h3", [_vm._v("Enagagement")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v("Jul 14 2017")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, "
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "cta section-padding parallax",
+          attrs: { "data-bg-image": "images/cta-bg.jpg", "data-speed": "7" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("h2", [
+                  _c("span", [_vm._v("We are going to...")]),
+                  _vm._v(" Celebrate Our Love")
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "events-section section-padding",
+          attrs: { id: "events" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Wedding events")])
+                ])
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "article-preview" }, [
-              _c("div", { staticClass: "article-meta" }, [
-                _c("a", { attrs: { href: "profile.html" } }, [
-                  _c("img", {
-                    attrs: { src: "http://i.imgur.com/N4VcUeJ.jpg" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "info" }, [
-                  _c("a", { staticClass: "author", attrs: { href: "" } }, [
-                    _vm._v("Albert Pai")
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-lg-10 col-lg-offset-1" }, [
+                _c("div", { staticClass: "event" }, [
+                  _c("div", { staticClass: "img-holder" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/events/img-1.jpg",
+                        alt: ""
+                      }
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "date" }, [_vm._v("January 20th")])
+                  _c("div", { staticClass: "details" }, [
+                    _c("h3", [_vm._v("The reception")]),
+                    _vm._v(" "),
+                    _c("ul", [
+                      _c("li", [
+                        _c("i", { staticClass: "fa fa-map-marker" }),
+                        _vm._v(" 32 big bro road, Chanpai, London.")
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("i", { staticClass: "fa fa-clock-o" }),
+                        _vm._v(" Nov 25 2017, 9AM - 5PM")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "see-location-btn popup-gmaps",
+                        attrs: {
+                          href:
+                            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25211.21212385712!2d144.95275648773628!3d-37.82748510398018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce7e0!2zTWVsYm91cm5lIFZJQyAzMDA0LCDgpoXgprjgp43gpp_gp43gprDgp4fgprLgpr_gpq_gprzgpr4!5e0!3m2!1sbn!2sbd!4v1503742051881"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    See location "
+                        ),
+                        _c("i", { staticClass: "fa fa-angle-right" })
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "event" }, [
+                  _c("div", { staticClass: "img-holder" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/events/img-2.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "details" }, [
+                    _c("h3", [_vm._v("Wedding party")]),
+                    _vm._v(" "),
+                    _c("ul", [
+                      _c("li", [
+                        _c("i", { staticClass: "fa fa-map-marker" }),
+                        _vm._v(" 32 big bro road, Chanpai, London.")
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("i", { staticClass: "fa fa-clock-o" }),
+                        _vm._v(" Nov 25 2017, 9AM - 5PM")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "see-location-btn popup-gmaps",
+                        attrs: {
+                          href:
+                            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.0160484383277!2d144.99053291585201!3d-37.81309307975254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642ef89a7e023%3A0xb1353055e38c1ab8!2sNew+York+Tomato+Cafe!5e0!3m2!1sbn!2sbd!4v1503743893919"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    See location "
+                        ),
+                        _c("i", { staticClass: "fa fa-angle-right" })
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "inportant-people-section section-padding",
+          attrs: { id: "people" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Groomsmen & Bridesmaid")])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "inportant-people-content" }, [
+                  _c("div", { staticClass: "tablist" }, [
+                    _c("ul", { staticClass: "nav" }, [
+                      _c("li", { staticClass: "active" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#groomsmen", "data-toggle": "tab" }
+                          },
+                          [_vm._v("Groomsmen")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#bridesmaid", "data-toggle": "tab" }
+                          },
+                          [_vm._v("Bridesmaid")]
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "tab-content" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade in active grid-wrapper",
+                        attrs: { id: "groomsmen" }
+                      },
+                      [
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-1.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-1.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Jhon Michel")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Best man")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-2.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-2.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Chasmoos jhon")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Best friden")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-3.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-3.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Kaiste pate")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-4.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-4.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Hatu Michel")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-5.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-5.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Michel doin")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/groomsmen/img-6.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/groomsmen/img-6.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Topper jone")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade grid-wrapper",
+                        attrs: { id: "bridesmaid" }
+                      },
+                      [
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-1.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-1.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Rachel Li")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Made of honor")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-2.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-2.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Male Vign")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Best friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-3.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-3.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Jonny Mich")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-4.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-4.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Brodd Wid")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-5.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-5.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Nokshal bedi")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "grid" }, [
+                          _c("div", { staticClass: "img-holder" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "popup-image",
+                                attrs: {
+                                  href:
+                                    "/frontend/dist/wedding/images/bridesmaid/img-6.jpg"
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img img-responsive",
+                                  attrs: {
+                                    src:
+                                      "/frontend/dist/wedding/images/bridesmaid/img-6.jpg",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "details" }, [
+                            _c("h3", [_vm._v("Holly Fie")]),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Friend")]),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "social-links" }, [
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-facebook" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-twitter" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-pinterest" })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _c("i", { staticClass: "fa fa-vimeo" })
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "gallery-section section-padding",
+          attrs: { id: "gallery" }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Our gallery")])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12 sortable-gallery" }, [
+                _c("div", { staticClass: "gallery-filters" }, [
+                  _c("ul", [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "current",
+                          attrs: { "data-filter": "*", href: "#" }
+                        },
+                        [_vm._v("All")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        { attrs: { "data-filter": ".wedding", href: "#" } },
+                        [_vm._v("Wedding")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        { attrs: { "data-filter": ".ceremony", href: "#" } },
+                        [_vm._v("Ceremony")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        { attrs: { "data-filter": ".party", href: "#" } },
+                        [_vm._v("Party")]
+                      )
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
                 _c(
-                  "button",
+                  "div",
                   {
-                    staticClass: "btn btn-outline-primary btn-sm pull-xs-right"
+                    staticClass:
+                      "gallery-container gallery-fancybox masonry-gallery"
                   },
                   [
-                    _c("i", { staticClass: "ion-heart" }),
-                    _vm._v(" 32\n            ")
+                    _c("div", { staticClass: "grid wedding" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-1.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-1.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid wedding ceremony" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-2.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-2.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid ceremony eudcation" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-3.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-3.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid wedding party" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-4.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-4.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid ceremony" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-5.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-5.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid party" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-6.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-6.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid wedding" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-7.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-7.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid ceremony" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "video-play-btn",
+                          attrs: {
+                            href:
+                              "https://www.youtube.com/embed/XSGBVzeBUbk?autoplay=1",
+                            "data-type": "iframe"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-8.jpg",
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("i", { staticClass: "fa fa-play" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "grid ceremony" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "fancybox",
+                          attrs: {
+                            href:
+                              "/frontend/dist/wedding/images/gallery/img-9.jpg",
+                            "data-fancybox-group": "gall-1"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img img-responsive",
+                            attrs: {
+                              src:
+                                "/frontend/dist/wedding/images/gallery/img-9.jpg",
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
+                    ])
                   ]
                 )
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "preview-link", attrs: { href: "" } }, [
-                _c("h1", [
-                  _vm._v(
-                    "The song you won't ever stop singing. No matter how hard you try."
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "rsvp-section section-padding parallax",
+          attrs: {
+            "data-bg-image": "images/rsvp-bg.jpg",
+            "data-speed": "7",
+            id: "rsvp"
+          }
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title-white" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Join our party")])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row content" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"
+                },
+                [
+                  _c("p", [
+                    _vm._v("Please reserve before December 16th, 2017.")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "form validate-rsvp-form row",
+                      attrs: { id: "rsvp-form", method: "post" }
+                    },
+                    [
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "name",
+                            placeholder: "Your Name*"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "email",
+                            name: "email",
+                            placeholder: "Your Email*"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "guest" }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { disabled: "", selected: "" } },
+                              [_vm._v("Number Of Guest*")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("1")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("2")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("3")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("4")])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "events" }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { disabled: "", selected: "" } },
+                              [_vm._v("I Am Attending*")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Al events")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Wedding ceremony")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Reception party")])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-12" }, [
+                        _c("textarea", {
+                          staticClass: "form-control",
+                          attrs: { name: "notes", placeholder: "Your Message*" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-12 submit-btn" }, [
+                        _c(
+                          "button",
+                          { staticClass: "submit", attrs: { type: "submit" } },
+                          [_vm._v("Send Invitation")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { attrs: { id: "loader" } }, [
+                          _c("i", {
+                            staticClass: "fa fa-refresh fa-spin fa-3x fa-fw"
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col col-md-12 success-error-message" },
+                        [
+                          _c("div", { attrs: { id: "success" } }, [
+                            _vm._v("Thank you")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { attrs: { id: "error" } }, [
+                            _vm._v(
+                              " Error occurred while sending email. Please try again later. "
+                            )
+                          ])
+                        ]
+                      )
+                    ]
                   )
+                ]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "getting-there-section section-padding" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col col-xs-12" }, [
+              _c("div", { staticClass: "section-title-white" }, [
+                _c("div", { staticClass: "vertical-line" }, [
+                  _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v("This is the description for the post.")]),
-                _vm._v(" "),
-                _c("span", [_vm._v("Read more...")])
+                _c("h2", [_vm._v("Getting there")])
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "sidebar" }, [
-              _c("p", [_vm._v("Popular Tags")]),
+          _c("div", { staticClass: "row content" }, [
+            _c("div", { staticClass: "col col-md-6" }, [
+              _c("h3", [_vm._v("Transportation")]),
               _vm._v(" "),
-              _c("div", { staticClass: "tag-list" }, [
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("programming")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("javascript")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("emberjs")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("angularjs")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("react")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("mean")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("node")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "tag-pill tag-default", attrs: { href: "" } },
-                  [_vm._v("rails")]
+              _c("p", [
+                _vm._v(
+                  " industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col col-md-6" }, [
+              _c("h3", [_vm._v("Accommodations")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  " industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s"
                 )
               ])
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "gift-registration-section section-padding" },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col col-xs-12" }, [
+                _c("div", { staticClass: "section-title" }, [
+                  _c("div", { staticClass: "vertical-line" }, [
+                    _c("span", [_c("i", { staticClass: "fi flaticon-two" })])
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Gift registration")])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row content" }, [
+              _c("div", { staticClass: "col col-lg-10 col-lg-offset-1" }, [
+                _c("p", [
+                  _vm._v(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, cupiditate, repudiandae. A ab sit laboriosam quis distinctio dignissimos, nemo cum sed hic, deleniti maiores rem iste labore commodi perferendis cumque.repudiandae. A ab sit laboriosam quis distinctio dignissimos, nemo cum sed hic."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "gif-registration-slider" }, [
+                  _c("div", { staticClass: "register" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/gift/img-1.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/gift/img-2.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/gift/img-3.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/gift/img-1.jpg",
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "register" }, [
+                    _c("img", {
+                      staticClass: "img img-responsive",
+                      attrs: {
+                        src: "/frontend/dist/wedding/images/gift/img-2.jpg",
+                        alt: ""
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -49786,15 +52672,1516 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(82)
 /* template */
-var __vue_template__ = __webpack_require__(81)
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/frontend/js/components/Blog.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-dd41f0c4", Component.options)
+  } else {
+    hotAPI.reload("data-v-dd41f0c4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "AppBlog",
+    data: function data() {
+        return {};
+    },
+
+
+    computed: {
+        // checkRouteBlog() {
+        //     if (this.$route.name.path != '/') {
+        //         return false;
+        //     }
+
+        //     return true;
+        // }
+    },
+
+    created: function created() {
+        // console.log(this.$route)
+    },
+
+    methods: {}
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "blog-main section-padding" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "blog-content col col-md-8" }, [
+            _c("div", { staticClass: "post" }, [
+              _c("div", { staticClass: "entry-header" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "entry-title" }, [
+                  _c(
+                    "h3",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { path: "/blog/detail" } } },
+                        [
+                          _vm._v(
+                            "Wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper quis nostrud exerci tation ullamcorper"
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "entry-content" },
+                [
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "read-more",
+                      attrs: { to: { path: "/blog/detail" } }
+                    },
+                    [_vm._v("Read more")]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "post" }, [
+              _c("div", { staticClass: "entry-header" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "entry-title" }, [
+                  _c(
+                    "h3",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { path: "/blog/detail" } } },
+                        [
+                          _vm._v(
+                            "Wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper quis nostrud exerci tation ullamcorper"
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "entry-content" },
+                [
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae enim, quo excepturi tempora ea deleniti nihil odio, reiciendis similique totam, dolore deserunt amet."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "read-more",
+                      attrs: { to: { path: "/blog/detail" } }
+                    },
+                    [_vm._v("Read more")]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(4)
+          ]),
+          _vm._v(" "),
+          _vm._m(5)
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "entry-date-media" }, [
+      _c("div", { staticClass: "entry-date" }, [
+        _vm._v("25 "),
+        _c("span", [_vm._v("july")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "entry-media" }, [
+        _c("img", {
+          staticClass: "img img-responsive",
+          attrs: {
+            src: "/frontend/dist/wedding/images/blog/img-1.jpg",
+            alt: ""
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "entry-formet" }, [
+      _c("div", { staticClass: "entry-meta" }, [
+        _c("div", { staticClass: "cat" }, [
+          _c("i", { staticClass: "fa fa-tags" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Uncategorize")]),
+          _vm._v(", "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Photography")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cat" }, [
+          _c("i", { staticClass: "fa fa-comments" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Comments: 5")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "entry-date-media" }, [
+      _c("div", { staticClass: "entry-date" }, [
+        _vm._v("03 "),
+        _c("span", [_vm._v("Aug")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "entry-media media-carousel" }, [
+        _c("div", { staticClass: "item" }, [
+          _c("img", {
+            staticClass: "img img-responsive",
+            attrs: {
+              src: "/frontend/dist/wedding/images/blog/img-2.jpg",
+              alt: ""
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [
+          _c("img", {
+            staticClass: "img img-responsive",
+            attrs: {
+              src: "/frontend/dist/wedding/images/blog/img-3.jpg",
+              alt: ""
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "entry-formet" }, [
+      _c("div", { staticClass: "entry-meta" }, [
+        _c("div", { staticClass: "cat" }, [
+          _c("i", { staticClass: "fa fa-tags" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Uncategorize")]),
+          _vm._v(", "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Photography")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cat" }, [
+          _c("i", { staticClass: "fa fa-comments" }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Comments: 5")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-pagination" }, [
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "#", "aria-label": "Previous" } }, [
+            _c("span", { staticClass: "fa fa-arrow-left" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("1")])]),
+        _vm._v(" "),
+        _c("li", { staticClass: "current" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("2")])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("4")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#", "aria-label": "Next" } }, [
+            _c("span", { staticClass: "fa fa-arrow-right" })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "blog-sidebar col col-md-4" }, [
+      _c("div", { staticClass: "widget search-widget" }, [
+        _c("h3", [_vm._v("Search")]),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Search your keyword" }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-default", attrs: { type: "submit" } },
+            [_c("i", { staticClass: "fa fa-search" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget categories-widget" }, [
+        _c("h3", [_vm._v("Categories")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Our story")])]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Wedding ceremony")])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Wedding events")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Gift")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Party")])]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Receiption ceremony")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget popular-posts-widget" }, [
+        _c("h3", [_vm._v("Popular postes")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("div", [
+              _c("span", { staticClass: "date" }, [_vm._v("01 Aug 2016")]),
+              _vm._v(" "),
+              _c("h6", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("div", [
+              _c("span", { staticClass: "date" }, [_vm._v("01 Aug 2016")]),
+              _vm._v(" "),
+              _c("h6", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("div", [
+              _c("span", { staticClass: "date" }, [_vm._v("01 Aug 2016")]),
+              _vm._v(" "),
+              _c("h6", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget populer-tags-widget" }, [
+        _c("h3", [_vm._v("Popular tags")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Wedding ceremony")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Love")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Story")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Events")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Love")])]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("First Metting")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Couple")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Gift")])])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-dd41f0c4", module.exports)
+  }
+}
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(85)
+/* template */
+var __vue_template__ = __webpack_require__(86)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/frontend/js/components/BlogDetail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-63560f0f", Component.options)
+  } else {
+    hotAPI.reload("data-v-63560f0f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "BlogDetail"
+});
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "section",
+        { staticClass: "blog-main blog-details-content section-padding" },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "blog-content col col-md-8" }, [
+                _c("div", { staticClass: "post" }, [
+                  _c("div", { staticClass: "entry-header" }, [
+                    _c("div", { staticClass: "entry-date-media" }, [
+                      _c("div", { staticClass: "entry-date" }, [
+                        _vm._v("25 "),
+                        _c("span", [_vm._v("july")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "entry-media" }, [
+                        _c("img", {
+                          staticClass: "img img-responsive",
+                          attrs: {
+                            src: "/frontend/dist/wedding/images/blog/img-1.jpg",
+                            alt: ""
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "entry-formet" }, [
+                      _c("div", { staticClass: "entry-meta" }, [
+                        _c("div", { staticClass: "cat" }, [
+                          _c("i", { staticClass: "fa fa-tags" }),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v("Uncategorize")
+                          ]),
+                          _vm._v(", "),
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v("Photography")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "cat" }, [
+                          _c("i", { staticClass: "fa fa-comments" }),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v("Comments: 5")
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "entry-title" }, [
+                      _c("h3", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(
+                            "Wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper quis nostrud exerci tation ullamcorper"
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "entry-content" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis tortor non lectus semper faucibus. Proin sit amet erat sed odio auctor sodales in sit amet magna. Pellentesque maximus accumsan enim et sagittis. Vivamus bibendum turpis nulla, eu finibus sem tempus quis. Fusce rutrum pharetra pellentesque. In hac habitasse platea dictumst. Aliquam eu mauris vulputate, euismod lacus vel, placerat libero. Aliquam vel dolor risus. Sed nisi massa, efficitur eget porta id, sollicitudin vel magna. Suspendisse quis tortor ac ex commodo elementum ut sed sem."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("blockquote", [
+                      _c("p", [
+                        _vm._v(
+                          "Donec nec elementum magna. Donec in vulputate ligula. Praesent rutrum nulla nec pharetra rhoncus. Aliquam ac ultricies neque, vitae blandit sapien. Donec vel ante vel ipsum scelerisque fermentum quis condimentum leo. Aenean a quam id libero elementum mollis non vitae augue."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "Nulla suscipit est et ipsum tincidunt sagittis. Curabitur rutrum suscipit nulla at scelerisque. In pharetra purus vitae risus sollicitudin aliquam. Proin non ex nunc. Praesent quis fermentum diam. Aliquam a malesuada eros, a euismod magna. Nulla viverra mi sed lectus viverra, et molestie magna dictum."
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "tag-social-share" }, [
+                  _c("div", { staticClass: "tag" }, [
+                    _c("a", { attrs: { href: "#" } }, [_vm._v("Finance")]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "#" } }, [_vm._v("Business")]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "#" } }, [_vm._v("Consulting")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "social-share" }, [
+                    _c("span", [_vm._v("Share:")]),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "social-links" }, [
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-facebook" })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-twitter" })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-google-plus" })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "fa fa-linkedin" })
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "comments-area" }, [
+                  _c("h3", { staticClass: "comments-title" }, [
+                    _vm._v("5 comments")
+                  ]),
+                  _vm._v(" "),
+                  _c("ol", { staticClass: "comment-list" }, [
+                    _c("li", [
+                      _c("article", [
+                        _c("div", { staticClass: "comment-meta" }, [
+                          _c(
+                            "div",
+                            { staticClass: "comment-author-metadata" },
+                            [
+                              _c("img", {
+                                staticClass: "avatar",
+                                attrs: {
+                                  src:
+                                    "/frontend/dist/wedding/images/blog-details/author.jpg",
+                                  alt: ""
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("h4", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v("Big bro")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "comment-metadata" }, [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v("June 4, 2017 at 08:00 AM")
+                                ])
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "comment-content" }, [
+                          _c("p", [
+                            _vm._v(
+                              "Aenean commodo interdum ligula imperdiet dictum. Donec mollis non diam eget condimentum. Aliquam eu eros est. Praesent vulputate sodales magna, egestas blandit mi scelerisque a. Ut commodo venenatis luctus."
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "review" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "comment-reply-link",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v("Reply")]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("ol", [
+                        _c("li", [
+                          _c("article", [
+                            _c("div", { staticClass: "comment-meta" }, [
+                              _c(
+                                "div",
+                                { staticClass: "comment-author-metadata" },
+                                [
+                                  _c("img", {
+                                    staticClass: "avatar",
+                                    attrs: {
+                                      src:
+                                        "/frontend/dist/wedding/images/blog-details/author-2.jpg",
+                                      alt: ""
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h4", [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _vm._v("Big bro's gf")
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "comment-metadata" },
+                                    [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v("June 4, 2017 at 08:00 AM")
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "comment-content" }, [
+                              _c("p", [
+                                _vm._v(
+                                  "Aenean commodo interdum ligula imperdiet dictum. Donec mollis non diam eget condimentum. Aliquam eu eros est. Praesent vulputate sodales magna, egestas blandit mi scelerisque a. Ut commodo venenatis luctus."
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "review" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "comment-reply-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("Reply")]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("ol", [
+                            _c("li", [
+                              _c("article", [
+                                _c("div", { staticClass: "comment-meta" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "comment-author-metadata" },
+                                    [
+                                      _c("img", {
+                                        staticClass: "avatar",
+                                        attrs: {
+                                          src:
+                                            "/frontend/dist/wedding/images/blog-details/author.jpg",
+                                          alt: ""
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("h4", [
+                                        _c("a", { attrs: { href: "#" } }, [
+                                          _vm._v("Big bro")
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "comment-metadata" },
+                                        [
+                                          _c("a", { attrs: { href: "#" } }, [
+                                            _vm._v("June 4, 2017 at 08:00 AM")
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "comment-content" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      "Aenean commodo interdum ligula imperdiet dictum. Donec mollis non diam eget condimentum. Aliquam eu eros est. Praesent vulputate sodales magna, egestas blandit mi scelerisque a. Ut commodo venenatis luctus."
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "review" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "comment-reply-link",
+                                      attrs: { href: "#" }
+                                    },
+                                    [_vm._v("Reply")]
+                                  )
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("article", [
+                        _c("div", { staticClass: "comment-meta" }, [
+                          _c(
+                            "div",
+                            { staticClass: "comment-author-metadata" },
+                            [
+                              _c("img", {
+                                staticClass: "avatar",
+                                attrs: {
+                                  src:
+                                    "/frontend/dist/wedding/images/blog-details/author.jpg",
+                                  alt: ""
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("h4", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v("Big bro")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "comment-metadata" }, [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v("June 4, 2017 at 08:00 AM")
+                                ])
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "comment-content" }, [
+                          _c("p", [
+                            _vm._v(
+                              "Aenean commodo interdum ligula imperdiet dictum. Donec mollis non diam eget condimentum. Aliquam eu eros est. Praesent vulputate sodales magna, egestas blandit mi scelerisque a. Ut commodo venenatis luctus."
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "review" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "comment-reply-link",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v("Reply")]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "comment-respond" }, [
+                    _c("h3", { staticClass: "comment-reply-title" }, [
+                      _vm._v("Leave a Reply")
+                    ]),
+                    _vm._v(" "),
+                    _c("form", { staticClass: "comment-form row" }, [
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Enter Name*" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-6" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "email", placeholder: "Enter Email*" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-12" }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Enter Website*" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-12" }, [
+                        _c("textarea", {
+                          staticClass: "form-control",
+                          attrs: { placeholder: "Enter Your Comment*" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col col-sm-12 submit-btn" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "theme-btn",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Post Comment")]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "blog-sidebar col col-md-4" }, [
+                _c("div", { staticClass: "widget search-widget" }, [
+                  _c("h3", [_vm._v("Search")]),
+                  _vm._v(" "),
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Search your keyword"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        attrs: { type: "submit" }
+                      },
+                      [_c("i", { staticClass: "fa fa-search" })]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget categories-widget" }, [
+                  _c("h3", [_vm._v("Categories")]),
+                  _vm._v(" "),
+                  _c("ul", [
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Our story")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Wedding ceremony")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Wedding events")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Gift")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Party")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Receiption ceremony")
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget popular-posts-widget" }, [
+                  _c("h3", [_vm._v("Popular postes")]),
+                  _vm._v(" "),
+                  _c("ul", [
+                    _c("li", [
+                      _c("div", [
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v("01 Aug 2016")
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(
+                              "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("div", [
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v("01 Aug 2016")
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(
+                              "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("div", [
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v("01 Aug 2016")
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(
+                              "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget populer-tags-widget" }, [
+                  _c("h3", [_vm._v("Popular tags")]),
+                  _vm._v(" "),
+                  _c("ul", [
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Wedding ceremony")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Love")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Story")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Events")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Love")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("First Metting")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Couple")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Gift")])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-63560f0f", module.exports)
+  }
+}
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(88)
+/* template */
+var __vue_template__ = __webpack_require__(90)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49833,12 +54220,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__env_config__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__env_config__ = __webpack_require__(89);
 //
 //
 //
@@ -49910,7 +54297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 80 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49929,7 +54316,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 81 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50026,19 +54413,19 @@ if (false) {
 }
 
 /***/ }),
-/* 82 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(83)
+  __webpack_require__(92)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(94)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(95)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50077,13 +54464,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 83 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(84);
+var content = __webpack_require__(93);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50103,7 +54490,7 @@ if(false) {
 }
 
 /***/ }),
-/* 84 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -50117,7 +54504,7 @@ exports.push([module.i, "\np {\n  text-align:center;\n  margin-top:10%;\n  font-
 
 
 /***/ }),
-/* 85 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50135,7 +54522,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 86 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50164,13 +54551,13 @@ if (false) {
 }
 
 /***/ }),
-/* 87 */
+/* 96 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 88 */
+/* 97 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

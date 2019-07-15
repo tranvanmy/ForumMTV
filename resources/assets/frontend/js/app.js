@@ -20,7 +20,7 @@ import Modal from '@/plugins/modal.js'
 Vue.use(Modal)
 
 const app = new Vue({
-    el: '#app',
+    el: '#home',
     router,
     render: h => h(App)
 });

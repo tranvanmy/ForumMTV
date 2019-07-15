@@ -4,5 +4,7 @@
     "/frontend/css/app.css": "/frontend/css/app.css",
     "/admin/css/app.css": "/admin/css/app.css",
     "/admin/lte/css/library.min.css": "/admin/lte/css/library.min.css",
+    "/frontend/dist/wedding/css/wedding.min.css": "/frontend/dist/wedding/css/wedding.min.css",
+    "/frontend/dist/wedding/js/wedding.min.js": "/frontend/dist/wedding/js/wedding.min.js",
     "/admin/lte/js/library.min.js": "/admin/lte/js/library.min.js"
 }

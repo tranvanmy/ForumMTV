@@ -1,12 +1,19 @@
 <template>
-  <footer>
-    <div class="container">
-      <a href="/" class="logo-font">WEBDEV</a>
-      <span class="attribution">
-        Học Vue qua dự án: Xây dựng SPA App với Laravel và VueJS <a href="https://webdev.hapiviet.com/">Webdev Hapiviet</a>
-      </span>
-    </div>
-  </footer>
+    <!-- start footer -->
+    <footer class="site-footer">
+        <div class="back-to-top">
+            <a href="#" class="back-to-top-btn"><span><i class="fi flaticon-cupid"></i></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <h2>Forever and Always Our Love</h2>
+                    <span>- Mick (The groom)</span>
+                </div>
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+    </footer>
+    <!-- end footer -->
 </template>
 
 <script>

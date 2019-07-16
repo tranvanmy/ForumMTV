@@ -11,20 +11,20 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="couple-logo">
-                        <h1><a href="/">M <i class="fi flaticon-shape-1"></i> D</a></h1>
+                        <h1><a href="#home">M <i class="fi flaticon-shape-1"></i> D</a></h1>
                     </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse navbar-right navigation-holder">
                     <button class="close-navbar"><i class="fa fa-close"></i></button>
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="#home">Home</a></li>
                         <li><a href="#couple">Couple</a></li>
                         <li><a href="#story">Story</a></li>
                         <li><a href="#events">Events</a></li>
                         <li><a href="#people">People</a></li>
                         <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#rsvp">RSVP</a></li>
-                        <li><router-link :to="{ path: '/blog' }">Blog </router-link></li>
+                        <li><a href="#rsvp">SVP</a></li>
+                        <!-- <li><router-link :to="{ path: '/blog' }">Blog </router-link></li> -->
                     </ul>
                 </div><!-- end of nav-collapse -->
             </div><!-- end of container -->

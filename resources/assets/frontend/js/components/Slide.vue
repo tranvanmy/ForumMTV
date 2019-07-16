@@ -10,16 +10,27 @@
 
         <!-- strat music-box -->
         <div class="music-box">
-            <button class="music-box-toggle-btn" @click="handleMusic">
-                <i class="fa fa-music"></i>
-            </button>
+             <social-sharing url="http://education.local"
+                title="The Progressive JavaScript Framework"
+                description="Intuitive, Fast and Composable MVVM for building interactive interfaces."
+                quote="Vue is a progressive framework for building user interfaces."
+                hashtags="vuejs,javascript,framework"
+                twitter-user="vuejs"
+                inline-template>
+            <div>
+
+             <network network="facebook">
+                <i class="fa fa-facebook"></i> Facebook
+            </network>
+            </div>
+            </social-sharing>
 
             <div class="music-holder">
                 <iframe src="/frontend/dist/wedding/video/BeautifulInWhite-ShaneFilan-524801.mp3" loop="true" style="display:none" id="iframeAudio"></iframe>
             </div>
         </div>
         <!-- end music box -->
-        
+
         <!-- start of hero -->
         <section class="hero">
             <div class="hero-slider hero-slider-s1">

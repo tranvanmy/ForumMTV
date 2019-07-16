@@ -29,11 +29,12 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.7",
         "@fortawesome/free-solid-svg-icons": "^5.4.2",
         "@fortawesome/vue-fontawesome": "^0.1.2",
-        "bootstrap": "^3.3.7",
         "admin-lte": "^2.4.8",
+        "bootstrap": "^3.3.7",
         "chokidar-cli": "^1.2.1",
         "npm": "^6.4.1",
         "vue-router": "^3.0.1",
+        "vue-social-sharing": "^2.4.5",
         "vue-toasted": "^1.1.25"
     }
 }

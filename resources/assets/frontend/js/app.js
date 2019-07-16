@@ -14,9 +14,12 @@ require('./bootstrap');
  */
 import Vue from 'vue';
 import App from '@/App.vue';
-import router from "@/router";
-import Modal from '@/plugins/modal.js'
+import router from '@/router';
+import Modal from '@/plugins/modal.js';
 
+var SocialSharing = require('vue-social-sharing');
+
+Vue.use(SocialSharing);
 Vue.use(Modal)
 
 const app = new Vue({

@@ -24,3 +24,17 @@ Route::group([
   Route::resource('get-posts', 'PostsController')->only(['index', 'store', 'update', 'destroy', 'show']);
   Route::get('get-tags', 'TagsController@getTags');
 });
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@signup');
+  
+    Route::group([
+      'middleware' => 'auth:api'
+    ], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
+});
